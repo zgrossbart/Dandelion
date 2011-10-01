@@ -67,11 +67,6 @@ function Seed() {
             circle.fillColor = '#fff3c9';
             group.addChild(circle);
             
-            //p1.x = p1.x + Math.floor(Math.random() * 80);
-            
-            //p1.y = p1.y - Math.floor(Math.random() * 80);
-            
-            
             path.add(new Point(p1.x + 2, p1.y + 2));
             
             if (i % 2 == 0) {
@@ -104,7 +99,7 @@ function Seed() {
         }
         
         this.group = group;
-        group.scale(0.75);
+        //group.scale(0.75);
         
         this.position = new Point(this.group.position.x, this.group.position.y + 15);
         
@@ -120,8 +115,13 @@ function Seed() {
     
     this.roateMove = function(/*int*/ angle) {
         if (this.group.position.x < 850 && this.group.position.y < 650) {
-            var offset = random(225, 275);
-            this.group.rotate(angle, new Point(view.center.x + offset, view.center.y + offset));
+            var offset = random(125, 275);
+            var neg = random(0, 2) % 2 == 0;
+            if (neg) {
+                this.group.rotate(angle, new Point(this.group.position.x - offset, this.group.position.y + offset));
+            } else {
+                this.group.rotate(angle, new Point(this.group.position.x + offset, this.group.position.y + offset));
+            }
         } else {
             /*
              * Then it is off the screen
@@ -154,10 +154,10 @@ jQuery(document).ready(function() {
     path.add(firstPoint);
     
     // The point through which we will create the arc:
-    var throughPoint = new Point(55, 475);
+    var throughPoint = new Point(75, 275);
     
     // The point at which the arc will end:
-    var toPoint = new Point(75, 375);
+    var toPoint = new Point(100, 100);
     
     // Draw an arc through 'throughPoint' to 'toPoint'
     path.arcTo(throughPoint, toPoint);
