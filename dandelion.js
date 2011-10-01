@@ -109,6 +109,23 @@ function Seed() {
         this.group.rotate(angle, this.position);//, view.center);//new Point(this.group.position - 15, this.group.position.y));
     }
     
+    this.roateMove = function(/*int*/ angle) {
+        var offset;
+        if (this.group.position.x < 850 && this.group.position.y < 775) {
+            offset = random(0, 200);
+            this.group.rotate(angle, new Point(view.center.x + offset, view.center.y + offset));
+        } else {
+            /*
+             * Then it is off the screen
+             */
+            this.isOffScreen = true
+        } 
+    }
+    
+    this.isOffscreen = function() {
+        return this.isOffScreen;
+    }
+    
     this.scale = function(/*double*/ scale) {
         this.group.scale(scale);
     }
@@ -116,6 +133,7 @@ function Seed() {
 
 var seed = null;
 var seeds = [];
+var seedCount = 0;
 var started = false;
 
 jQuery(document).ready(function() {
@@ -153,25 +171,41 @@ jQuery(document).ready(function() {
     
     var angle = 360 / bulb.length;
     
-    for (var i = 0; i < bulb.length; i+= 2) {
+    for (var i = 0; i < bulb.length; i+= 1) {
         var seed = new Seed()
         seed.draw(bulb.getPointAt(i));
         seed.rotate(i * angle);
         seeds.push(seed);
-        
-        //if (bulb.getPointAt(i)) {
-        //    var c = new Path.Circle(bulb.getPointAt(i), 2);
-        //    c.fillColor = 'purple';
-        //}
     }
 });
 
 function onMouseUp(event) {
     started = !started;
+    
+    if (started) {
+        var id = setInterval(function() {
+            seedCount++;
+            //console.log("seedCount: " + seedCount);
+            if (seedCount === seeds.length - 1) {
+                clearInterval(id);
+            }
+        }, 150);
+    }
 }
 
 function onFrame(event) {
     if (started) {
-        data.seed.rotate(3);
+        var stillRunning = false;
+        
+        for (var i = 0; i < seeds.length; i++) {
+            if (i < seedCount && !seeds[i].isOffscreen()) {
+                stillRunning = true;
+                seeds[i].roateMove(4);
+            }
+        }
+        
+        if (!stillRunning) {
+            started = false;
+        }
     }
 }
