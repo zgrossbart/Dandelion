@@ -19,7 +19,7 @@ function Seed() {
         /*
          * Draw the small oval at the bottom of the seed
          */
-        var size = new Size(4, -height);
+        var size = new Size(4, 10);
         var rectangle = new Rectangle(p, size);
         var bottom = new Path.Oval(rectangle);
         bottom.fillColor = '#d0aa7b';
@@ -29,34 +29,33 @@ function Seed() {
             p.y -= height;
         }
         
+        
+        /*
+         * Draw the stem of the seed
+         */
+        var stem = new Path();
+        stem.strokeColor = '#567e37';
+        stem.strokeWidth = 1;
+        
+        stem.add(new Point(p.x + 2, p.y));
+    
+    
+        // The point through which we will create the arc:
+        var throughPoint = new Point(p.x + 4, p.y - height / 2);
+        
         // The point at which the arc will end:
         var toPoint = new Point(p.x + 3, p.y - height);
         
-        //if (!shortStem) {
-            /*
-             * Draw the stem of the seed
-             */
-            var stem = new Path();
-            stem.strokeColor = '#567e37';
-            stem.strokeWidth = 1;
-            
-            stem.add(new Point(p.x + 2, p.y));
-        
-        
-            // The point through which we will create the arc:
-            var throughPoint = new Point(p.x + 4, p.y - height / 2);
-            
-            // Draw an arc through 'throughPoint' to 'toPoint'
-            stem.arcTo(throughPoint, toPoint);
-            group.addChild(stem);
-        //}
+        // Draw an arc through 'throughPoint' to 'toPoint'
+        stem.arcTo(throughPoint, toPoint);
+        group.addChild(stem);
         
         /*
          * Draw the fluttery parts on the top
          */
         p = toPoint;
         
-        for (var i = 0; i < random(6, 12); i++) {
+        for (var i = 0; i < random(6, 8); i++) {
             path = new Path();
             path.strokeColor = '#fff3c9';
             path.strokeWidth = 1;
