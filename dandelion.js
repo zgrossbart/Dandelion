@@ -111,8 +111,8 @@ function Seed() {
     
     this.roateMove = function(/*int*/ angle) {
         var offset;
-        if (this.group.position.x < 850 && this.group.position.y < 800) {
-            offset = random(25, 200);
+        if (this.group.position.x < 850 && this.group.position.y < 650) {
+            offset = random(25, 75);
             this.group.rotate(angle, new Point(view.center.x + offset, view.center.y + offset));
         } else {
             /*
@@ -143,14 +143,14 @@ jQuery(document).ready(function() {
     path.strokeColor = '#567e37';
     path.strokeWidth = 5;
     
-    var firstPoint = new Point(30, 600);
+    var firstPoint = new Point(0, 550);
     path.add(firstPoint);
     
     // The point through which we will create the arc:
-    var throughPoint = new Point(85, 525);
+    var throughPoint = new Point(55, 475);
     
     // The point at which the arc will end:
-    var toPoint = new Point(125, 425);
+    var toPoint = new Point(75, 375);
     
     // Draw an arc through 'throughPoint' to 'toPoint'
     path.arcTo(throughPoint, toPoint);
