@@ -1,23 +1,27 @@
+var data = {};
+
+function random(from, to) {
+    return Math.floor(Math.random() * (to - from + 1) + from);
+}
+
 function Seed() {
     
     this.draw = function (/*Point*/ p, /*int*/ angle) {
-        var c = new Path.Circle(p, 2);
-        c.fillColor = 'purple';
-        
-        p.y += 15;
+        var height = random(10, 50);
+        p.y += height;
         
         var group = new Group();
         
         /*
          * Draw the small oval at the bottom of the seed
          */
-        var size = new Size(4, -15);
+        var size = new Size(4, -height);
         var rectangle = new Rectangle(p, size);
         var bottom = new Path.Oval(rectangle);
         bottom.fillColor = 'green';
         group.addChild(bottom);
         
-        p.y -= 15;
+        p.y -= height;
         
         /*
          * Draw the stem of the seed
@@ -29,10 +33,10 @@ function Seed() {
         stem.add(new Point(p.x + 2, p.y));
         
         // The point through which we will create the arc:
-        var throughPoint = new Point(p.x + 4, p.y - 10);
+        var throughPoint = new Point(p.x + 4, p.y - height / 2);
         
         // The point at which the arc will end:
-        var toPoint = new Point(p.x + 3, p.y - 15);
+        var toPoint = new Point(p.x + 3, p.y - height);
         
         // Draw an arc through 'throughPoint' to 'toPoint'
         stem.arcTo(throughPoint, toPoint);
@@ -63,20 +67,20 @@ function Seed() {
             
             if (i % 2 == 0) {
                 // The point through which we will create the arc:
-                throughPoint = new Point(p1.x + Math.floor(Math.random() * 5), 
-                                         p1.y - Math.floor(Math.random() * 5));
+                throughPoint = new Point(p1.x + random(1, 5), 
+                                         p1.y - random(1, 5));
             
                 // The point at which the arc will end:
-                toPoint = new Point(p1.x + Math.floor(Math.random() * 25), 
-                                    p1.y - 20 - Math.floor(Math.random() * 5));
+                toPoint = new Point(p1.x + random(5, 25), 
+                                    p1.y - 20 - random(1, 5));
             } else {
                 // The point through which we will create the arc:
-                throughPoint = new Point(p1.x - Math.floor(Math.random() * 5), 
-                                         p1.y - Math.floor(Math.random() * 5));
+                throughPoint = new Point(p1.x - random(1, 5), 
+                                         p1.y - random(1, 5));
                 
                 // The point at which the arc will end:
-                toPoint = new Point(p1.x - Math.floor(Math.random() * 25), 
-                                    p1.y - 20 - Math.floor(Math.random() * 5));
+                toPoint = new Point(p1.x - random(5, 25), 
+                                    p1.y - 20 - random(1, 5));
             }
             
             // Draw an arc through 'throughPoint' to 'toPoint'
@@ -92,6 +96,9 @@ function Seed() {
         
         this.group = group;
         group.scale(0.5);
+        
+        this.position = new Point(this.group.position.x, this.group.position.y + 15);
+        
     }
     
     this.move = function(/*Point*/ point) {
@@ -99,7 +106,7 @@ function Seed() {
     }
     
     this.rotate = function(/*int*/ angle) {
-        this.group.rotate(angle, view.center);//new Point(this.group.position - 15, this.group.position.y));
+        this.group.rotate(angle, this.position);//, view.center);//new Point(this.group.position - 15, this.group.position.y));
     }
     
     this.scale = function(/*double*/ scale) {
@@ -107,7 +114,8 @@ function Seed() {
     }
 }
 
-var seed;
+var seed = null;
+var seeds = [];
 var started = false;
 
 jQuery(document).ready(function() {
@@ -139,13 +147,28 @@ jQuery(document).ready(function() {
     bulb.fillColor = 'black';
     group.addChild(bulb);
     
-    var topLeft = new Point(130, 565);
-    seed = new Seed()
-    seed.draw(topLeft);
+    //var topLeft = new Point(130, 465);
+    //data.seed = new Seed()
+    //data.seed.draw(topLeft);
+    //return;
     //seed.move(new Point(-100, -100));
     //seed.rotate(90);
     
     //group.translate(new Point(200, -200));
+    
+    var angle = 360 / bulb.length;
+    
+    for (var i = 0; i < bulb.length; i+= 2) {
+        var seed = new Seed()
+        seed.draw(bulb.getPointAt(i));
+        seed.rotate(i * angle);
+        seeds.push(seed);
+        
+        //if (bulb.getPointAt(i)) {
+        //    var c = new Path.Circle(bulb.getPointAt(i), 2);
+        //    c.fillColor = 'purple';
+        //}
+    }
 });
 
 function onMouseUp(event) {
@@ -154,6 +177,6 @@ function onMouseUp(event) {
 
 function onFrame(event) {
     if (started) {
-        seed.rotate(3);
+        data.seed.rotate(3);
     }
 }
