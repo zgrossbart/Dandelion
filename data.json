@@ -1,0 +1,281 @@
+﻿var DATA = {
+    "Aidan Gillen": [
+        "Game of Thrones",
+        "The Wire"
+    ],
+    "Amy Ryan": [
+        "In Treatment",
+        "The Wire"
+    ],
+    "Annie Fitzgerald": [
+        "Big Love",
+        "True Blood"
+    ],
+    "Anwan Glover": [
+        "Treme",
+        "The Wire"
+    ],
+    "Blair Underwood": [
+        "John from Cincinnati",
+        "Sex and the City"
+    ],
+    "Brian F. O'Byrne": [
+        "Oz",
+        "K Street"
+    ],
+    "Chris Bauer": [
+        "True Blood",
+        "The Wire"
+    ],
+    "Clarke Peters": [
+        "Oz",
+        "True Blood",
+        "The Wire"
+    ],
+    "Cynthia Ettinger": [
+        "Carnivàle",
+        "Curb Your Enthusiasm",
+        "Deadwood"
+    ],
+    "Cyrus Farmer": [
+        "The Corner",
+        "Oz",
+        "The Wire"
+    ],
+    "Dane DeHaan": [
+        "In Treatment",
+        "True Blood"
+    ],
+    "Dania Remirez": [
+        "Entourage",
+        "The Sopranos"
+    ],
+    "David Costabile": [
+        "Flight of the Conchords",
+        "The Wire"
+    ],
+    "Dayton Callie": [
+        "Deadwood",
+        "In Treatment"
+    ],
+    "Domonic Lombardozzi": [
+        "Entourage",
+        "Oz",
+        "The Wire"
+    ],
+    "Don Swayze": [
+        "Carnivàle",
+        "True Blood"
+    ],
+    "Edie Falco": [
+        "Oz",
+        "The Sopranos"
+    ],
+    "Edoardo Ballerini": [
+        "Boardwalk Empire",
+        "The Sopranos"
+    ],
+    "Edwina Findley": [
+        "True Blood",
+        "The Wire"
+    ],
+    "Garret Dillahunt": [
+        "Deadwood",
+        "John from Cincinnati"
+    ],
+    "Glynn Turman": [
+        "John from Cincinnati",
+        "The Wire"
+    ],
+    "Grant Show": [
+        "Big Love",
+        "Six Feet Under"
+    ],
+    "Greg Antonacci": [
+        "Boardwalk Empire",
+        "The Sopranos"
+    ],
+    "J. Smith-Cameron": [
+        "K Street",
+        "True Blood"
+    ],
+    "James Ransone": [
+        "Treme",
+        "The Wire"
+    ],
+    "Jamie-Lynn Sigler": [
+        "Entourage",
+        "The Sopranos"
+    ],
+    "Jim Beaver": [
+        "Deadwood",
+        "John from Cincinnati",
+        "Six Feet Under"
+    ],
+    "Jim True-Frost": [
+        "True Blood",
+        "The Wire"
+    ],
+    "J.D. Williams": [
+        "The Wire",
+        "Oz",
+        "Sex and the City"
+    ],
+    "John Carroll Lynch": [
+        "Big Love",
+        "Carnivàle",
+        "How To Make It in America"
+    ],
+    "John Doman": [
+        "Oz",
+        "The Sopranos",
+        "The Wire"
+    ],
+    "John Hawkes": [
+        "Eastbound and Down",
+        "Deadwood"
+    ],
+    "John Seda": [
+        "Oz",
+        "Treme"
+    ],
+    "Kevin Rankin": [
+        "Big Love",
+        "Six Feet Under"
+    ],
+    "Kim Dickens": [
+        "Deadwood",
+        "Treme"
+    ],
+    "Laila Robins": [
+        "In Treatment",
+        "The Sopranos",
+        "Sex and the City",
+        "Bored to Death"
+    ],
+    "Lance Reddick": [
+        "The Wire",
+        "Oz",
+        "The Corner"
+    ],
+    "Louis Lombardi": [
+        "Entourage",
+        "The Sopranos"
+    ],
+    "Luis Guzmán": [
+        "How To Make It in America",
+        "John from Cincinnati",
+        "Oz"
+    ],
+    "Luke Perry": [
+        "Oz",
+        "John from Cincinnati"
+    ],
+    "Mary Kay Place": [
+        "Big Love",
+        "Bored to Death"
+    ],
+    "Matt Winston": [
+        "John from Cincinnati",
+        "Six Feet Under"
+    ],
+    "Method Man": [
+        "Oz",
+        "The Wire"
+    ],
+    "Michael Kenneth William": [
+        "Boardwalk Empire",
+        "The Sopranos",
+        "The Wire"
+    ],
+    "Michelle Forbes": [
+        "In Treatment",
+        "True Blood"
+    ],
+    "Paul Ben-Victor": [
+        "Entourage",
+        "The Wire",
+        "John from Cincinnati",
+        "Curb Your Enthusiasm"
+    ],
+    "Paul Herman": [
+        "Entourage",
+        "The Sopranos"
+    ],
+    "Paula Malcomson": [
+        "Deadwood",
+        "John from Cincinnati",
+        "Six Feet Under"
+    ],
+    "Reg E. Cathey": [
+        "The Wire",
+        "Oz",
+        "The Corner"
+    ],
+    "Robert Clohessy": [
+        "Boardwalk Empire",
+        "Oz"
+    ],
+    "Roxanne Hart": [
+        "Hung",
+        "Oz"
+    ],
+    "Seth Gilliam": [
+        "Oz",
+        "The Wire"
+    ],
+    "Stephen Toblowsky": [
+        "Deadwood",
+        "Curb Your Enthusiasm",
+        "John from Cincinnati"
+    ],
+    "Steve Buscemi": [
+        "Boardwalk Empire",
+        "The Sopranos"
+    ],
+    "Steve Earle": [
+        "The Wire",
+        "Six Feet Under"
+    ],
+    "Ted Danson": [
+        "Bored to Death",
+        "Curb Your Enthusiasm"
+    ],
+    "Tom Aldredge": [
+        "Boardwalk Empire",
+        "The Sopranos"
+    ],
+    "Tom Mardirosian": [
+        "Oz",
+        "The Wire"
+    ],
+    "Tom Townsend": [
+        "Entourage",
+        "The Wire"
+    ],
+    "Toni Lewis": [
+        "Oz",
+        "The Wire"
+    ],
+    "Vincent Piazza": [
+        "Boardwalk Empire",
+        "The Sopranos"
+    ],
+    "Wendel Pierce": [
+        "Treme",
+        "The Wire"
+    ],
+    "William Sanderson": [
+        "True Blood",
+        "Deadwood"
+    ],
+    "Willie Garson": [
+        "John from Cincinnati",
+        "Sex and the City"
+    ],
+    "Zeljko Ivanek": [
+        "Big Love",
+        "True Blood",
+        "Oz"
+    ]
+};
