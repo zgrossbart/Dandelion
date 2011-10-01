@@ -36,7 +36,7 @@ p {
 }
 
 #canvas {
-    background: url("blue_sky.png") no-repeat scroll center center transparent;
+    background: url("blue_sky_grass.jpg") no-repeat scroll center center transparent;
     border: thin solid #E9E9E9;
     border-radius: 12px;
 }

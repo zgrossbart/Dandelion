@@ -112,7 +112,7 @@ function Seed() {
     this.roateMove = function(/*int*/ angle) {
         var offset;
         if (this.group.position.x < 850 && this.group.position.y < 800) {
-            offset = random(0, 200);
+            offset = random(25, 200);
             this.group.rotate(angle, new Point(view.center.x + offset, view.center.y + offset));
         } else {
             /*
@@ -143,14 +143,14 @@ jQuery(document).ready(function() {
     path.strokeColor = '#567e37';
     path.strokeWidth = 5;
     
-    var firstPoint = new Point(30, 750);
+    var firstPoint = new Point(30, 600);
     path.add(firstPoint);
     
     // The point through which we will create the arc:
-    var throughPoint = new Point(85, 675);
+    var throughPoint = new Point(85, 525);
     
     // The point at which the arc will end:
-    var toPoint = new Point(125, 575);
+    var toPoint = new Point(125, 425);
     
     // Draw an arc through 'throughPoint' to 'toPoint'
     path.arcTo(throughPoint, toPoint);
@@ -183,17 +183,17 @@ jQuery(document).ready(function() {
 });
 
 function start() {
-    started = !started;
+    started = true;
     
-    if (started) {
-        var id = setInterval(function() {
-            seedCount++;
-            //console.log("seedCount: " + seedCount);
-            if (seedCount === seeds.length - 1) {
-                clearInterval(id);
-            }
-        }, 150);
-    }
+    var id = setInterval(function() {
+        seedCount++;
+        //console.log("seedCount: " + seedCount);
+        if (seedCount === seeds.length - 1) {
+            clearInterval(id);
+        }
+    }, 250);
+    
+    //clearInterval(id);
 }
 
 function onMouseUp(event) {
