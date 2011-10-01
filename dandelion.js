@@ -114,7 +114,7 @@ function Seed() {
     
     this.roateMove = function(/*int*/ angle) {
         if (this.group.position.x < 850 && this.group.position.y < 650) {
-            var offset = random(125, 275);
+            var offset = random(25, 175);
             var neg = random(0, 2) % 2 == 0;
             if (neg) {
                 this.group.rotate(angle, new Point(this.group.position.x - offset, this.group.position.y + offset));
