@@ -5,9 +5,11 @@ function random(from, to) {
 }
 
 function Seed() {
-    
-    this.draw = function (/*Point*/ p, /*int*/ angle) {
+    this.draw = function (/*Point*/ p, /*boolean*/ shortStem) {
         var height = random(10, 50);
+        if (shortStem) {
+            height = 2;
+        }
         p.y += height;
         
         var group = new Group();
@@ -21,33 +23,38 @@ function Seed() {
         bottom.fillColor = '#d0aa7b';
         group.addChild(bottom);
         
-        p.y -= height;
-        
-        /*
-         * Draw the stem of the seed
-         */
-        var stem = new Path();
-        stem.strokeColor = '#567e37';
-        stem.strokeWidth = 1;
-        
-        stem.add(new Point(p.x + 2, p.y));
-        
-        // The point through which we will create the arc:
-        var throughPoint = new Point(p.x + 4, p.y - height / 2);
+        if (shortStem) {
+            p.y -= height;
+        }
         
         // The point at which the arc will end:
         var toPoint = new Point(p.x + 3, p.y - height);
         
-        // Draw an arc through 'throughPoint' to 'toPoint'
-        stem.arcTo(throughPoint, toPoint);
-        group.addChild(stem);
+        //if (!shortStem) {
+            /*
+             * Draw the stem of the seed
+             */
+            var stem = new Path();
+            stem.strokeColor = '#567e37';
+            stem.strokeWidth = 1;
+            
+            stem.add(new Point(p.x + 2, p.y));
+        
+        
+            // The point through which we will create the arc:
+            var throughPoint = new Point(p.x + 4, p.y - height / 2);
+            
+            // Draw an arc through 'throughPoint' to 'toPoint'
+            stem.arcTo(throughPoint, toPoint);
+            group.addChild(stem);
+        //}
         
         /*
          * Draw the fluttery parts on the top
          */
         p = toPoint;
         
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < random(12, 18); i++) {
             path = new Path();
             path.strokeColor = '#fff3c9';
             path.strokeWidth = 1;
@@ -71,7 +78,7 @@ function Seed() {
                                          p1.y - random(1, 5));
             
                 // The point at which the arc will end:
-                toPoint = new Point(p1.x + random(5, 25), 
+                toPoint = new Point(p1.x + random(5, 35), 
                                     p1.y - 20 - random(1, 5));
             } else {
                 // The point through which we will create the arc:
@@ -79,7 +86,7 @@ function Seed() {
                                          p1.y - random(1, 5));
                 
                 // The point at which the arc will end:
-                toPoint = new Point(p1.x - random(5, 25), 
+                toPoint = new Point(p1.x - random(5, 35), 
                                     p1.y - 20 - random(1, 5));
             }
             
@@ -95,7 +102,7 @@ function Seed() {
         }
         
         this.group = group;
-        group.scale(0.5);
+        group.scale(0.75);
         
         this.position = new Point(this.group.position.x, this.group.position.y + 15);
         
@@ -131,7 +138,6 @@ function Seed() {
     }
 }
 
-var seed = null;
 var seeds = [];
 var seedCount = 0;
 var started = false;
@@ -171,15 +177,24 @@ jQuery(document).ready(function() {
     
     var angle = 360 / bulb.length;
     
-    for (var i = 0; i < bulb.length; i+= 1) {
+    for (var i = 0; i < bulb.length; i++) {
         var seed = new Seed()
         seed.draw(bulb.getPointAt(i));
         seed.rotate(i * angle);
         seeds.push(seed);
     }
     
-    setTimeout(start, 3000);
-    start();
+    for (var i = 0; i < 18; i++) {
+        var seed = new Seed()
+        var point = new Point(toPoint.x + random(-3, 3),
+                              toPoint.y + random(-3, 3));
+        seed.draw(new Point(toPoint), true);
+        seed.rotate(random(0, 360));
+        seeds.push(seed);
+    }
+    
+    //setTimeout(start, 3000);
+    //start();
 });
 
 function start() {
@@ -198,6 +213,7 @@ function start() {
 
 function onMouseUp(event) {
     start();
+    //started = !started;
 }
 
 function onFrame(event) {
