@@ -1,4 +1,4 @@
-var data = {};
+var count = 0;
 
 function random(from, to) {
     return Math.floor(Math.random() * (to - from + 1) + from);
@@ -6,6 +6,8 @@ function random(from, to) {
 
 function Seed() {
     this.draw = function (/*Point*/ p, /*boolean*/ shortStem) {
+        count++;
+        this.neg = count % 2 === 0
         var height = random(10, 50);
         if (shortStem) {
             height = 2;
@@ -54,7 +56,7 @@ function Seed() {
          */
         p = toPoint;
         
-        for (var i = 0; i < random(12, 18); i++) {
+        for (var i = 0; i < random(6, 12); i++) {
             path = new Path();
             path.strokeColor = '#fff3c9';
             path.strokeWidth = 1;
@@ -117,9 +119,8 @@ function Seed() {
     }
     
     this.roateMove = function(/*int*/ angle) {
-        var offset;
         if (this.group.position.x < 850 && this.group.position.y < 650) {
-            offset = random(25, 75);
+            var offset = random(225, 275);
             this.group.rotate(angle, new Point(view.center.x + offset, view.center.y + offset));
         } else {
             /*
@@ -193,8 +194,8 @@ jQuery(document).ready(function() {
         seeds.push(seed);
     }
     
-    //setTimeout(start, 3000);
-    //start();
+    setTimeout(start, 3000);
+    start();
 });
 
 function start() {
@@ -212,8 +213,8 @@ function start() {
 }
 
 function onMouseUp(event) {
-    start();
-    //started = !started;
+    //start();
+    started = !started;
 }
 
 function onFrame(event) {
