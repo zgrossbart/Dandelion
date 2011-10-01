@@ -18,7 +18,7 @@ function Seed() {
         var size = new Size(4, -height);
         var rectangle = new Rectangle(p, size);
         var bottom = new Path.Oval(rectangle);
-        bottom.fillColor = 'green';
+        bottom.fillColor = '#d0aa7b';
         group.addChild(bottom);
         
         p.y -= height;
@@ -27,7 +27,7 @@ function Seed() {
          * Draw the stem of the seed
          */
         var stem = new Path();
-        stem.strokeColor = 'green';
+        stem.strokeColor = '#567e37';
         stem.strokeWidth = 1;
         
         stem.add(new Point(p.x + 2, p.y));
@@ -49,13 +49,13 @@ function Seed() {
         
         for (var i = 0; i < 8; i++) {
             path = new Path();
-            path.strokeColor = 'green';
+            path.strokeColor = '#fff3c9';
             path.strokeWidth = 1;
             
             var p1 = new Point(p.x, p.y);
             
             var circle = new Path.Circle(p1, 2);
-            circle.fillColor = 'green';
+            circle.fillColor = '#fff3c9';
             group.addChild(circle);
             
             //p1.x = p1.x + Math.floor(Math.random() * 80);
@@ -89,7 +89,7 @@ function Seed() {
             group.addChild(path);
             
             circle = new Path.Circle(toPoint, 2);
-            circle.fillColor = 'green';
+            circle.fillColor = '#fff3c9';
             
             group.addChild(circle);
         }
@@ -122,7 +122,7 @@ jQuery(document).ready(function() {
     var group = new Group();
     
     var path = new Path();
-    path.strokeColor = 'black';
+    path.strokeColor = '#567e37';
     path.strokeWidth = 5;
     
     var firstPoint = new Point(30, 750);
@@ -138,13 +138,8 @@ jQuery(document).ready(function() {
     path.arcTo(throughPoint, toPoint);
     group.addChild(path);
     
-    // Add a red circle shaped path at the position of 'throughPoint':
-    var circle = new Path.Circle(throughPoint, 5);
-    circle.fillColor = 'red';
-    group.addChild(circle);
-    
     var bulb = new Path.Circle(toPoint, 10);
-    bulb.fillColor = 'black';
+    bulb.fillColor = '#567e37';
     group.addChild(bulb);
     
     //var topLeft = new Point(130, 465);
