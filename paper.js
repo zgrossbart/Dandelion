@@ -13,7 +13,7 @@
  *
  * All rights reserved.
  *
- * Date: Sun Aug 21 16:38:06 2011 +0200
+ * Date: Fri Sep 23 11:19:03 2011 +0200
  *
  ***
  *
@@ -1329,7 +1329,7 @@ var Matrix = this.Matrix = Base.extend({
 		return this;
 	},
 
-	scale: function(hor, ver , center) {
+	scale: function( hor, ver, center) {
 		if (arguments.length < 2 || typeof ver === 'object') {
 			center = Point.read(arguments, 1);
 			ver = hor;
@@ -1360,7 +1360,7 @@ var Matrix = this.Matrix = Base.extend({
 				Matrix.getRotateInstance.apply(Matrix, arguments));
 	},
 
-	shear: function(hor, ver, center) {
+	shear: function( hor, ver, center) {
 		if (arguments.length < 2 || typeof ver === 'object') {
 			center = Point.read(arguments, 1);
 			ver = hor;
@@ -1477,8 +1477,30 @@ var Matrix = this.Matrix = Base.extend({
 				max[0] - min[0], max[1] - min[1]);
 	},
 
-	getDeterminant: function() {
-		return this._a * this._d - this._b * this._c;
+	inverseTransform: function(point) {
+		return this._inverseTransform(Point.read(arguments));
+	},
+
+	_getDeterminant: function() {
+		var det = this._a * this._d - this._b * this._c;
+		return isFinite(det) && Math.abs(det) > Numerical.EPSILON
+				&& isFinite(this._tx) && isFinite(this._ty)
+				? det : null;
+	},
+
+	_inverseTransform: function(point, dest, dontNotify) {
+		var det = this._getDeterminant();
+		if (!det)
+			return null;
+		var x = point.x - this._tx,
+			y = point.y - this._ty;
+		if (!dest)
+			dest = new Point(Point.dont);
+		return dest.set(
+			(x * this._d - y * this._b) / det,
+			(y * this._a - x * this._c) / det,
+			dontNotify
+		);
 	},
 
 	getTranslation: function() {
@@ -1504,28 +1526,22 @@ var Matrix = this.Matrix = Base.extend({
 	},
 
 	isInvertible: function() {
-		var det = this.getDeterminant();
-		return isFinite(det) && det != 0 && isFinite(this._tx)
-				&& isFinite(this._ty);
+		return !!this._getDeterminant();
 	},
 
 	isSingular: function() {
-		return !this.isInvertible();
+		return !this._getDeterminant();
 	},
 
 	createInverse: function() {
-		var det = this.getDeterminant();
-		if (isFinite(det) && det != 0 && isFinite(this._tx)
-				&& isFinite(this._ty)) {
-			return Matrix.create(
+		var det = this._getDeterminant();
+		return det && Matrix.create(
 				this._d / det,
 				-this._c / det,
 				-this._b / det,
 				this._a / det,
 				(this._b * this._ty - this._d * this._tx) / det,
 				(this._c * this._tx - this._a * this._ty) / det);
-		}
-		return null;
 	},
 
 	createShiftless: function() {
@@ -1824,11 +1840,20 @@ var Item = this.Item = Base.extend({
 			delete this._position;
 		}
 		if (flags & ChangeFlag.APPEARANCE) {
-			if (this._project)
-				this._project._needsRedraw();
+			this._project._needsRedraw();
 		}
 		if (this._parentSymbol)
 			this._parentSymbol._changed(flags);
+		if (this._project._changes) {
+			var entry = this._project._changesById[this._id];
+			if (entry) {
+				entry.flags |= flags;
+			} else {
+				entry = { item: this, flags: flags };
+				this._project._changesById[this._id] = entry;
+				this._project._changes.push(entry);
+			}
+		}
 	},
 
 	getId: function() {
@@ -1976,6 +2001,15 @@ var Item = this.Item = Base.extend({
 				}
 			}
 		}
+	},
+
+	getLayer: function() {
+		var parent = this;
+		while (parent = parent._parent) {
+			if (parent instanceof Layer)
+				return parent;
+		}
+		return null;
 	},
 
 	getParent: function() {
@@ -3752,7 +3786,7 @@ var Curve = this.Curve = Base.extend({
 				return [0.5 * (w[0].x + w[5].x)];
 			if (isFlatEnough(w)) {
 				var line = new Line(w[0], w[5], true);
-				return [ line.vector.getLength(true) < Numerical.EPSILON
+				return [ line.vector.getLength(true) <= Numerical.EPSILON
 						? line.point.x
 						: xAxis.intersect(line).x ];
 			}
@@ -4437,8 +4471,8 @@ var Path = this.Path = PathItem.extend({
 				ctx.rect(point._x - 1, point._y - 1, 2, 2);
 				ctx.fillStyle = '#ffffff';
 				ctx.fill();
-				ctx.restore();
 			}
+			ctx.restore();
 		}
 	}
 
@@ -6575,6 +6609,22 @@ var View = this.View = PaperScopeItem.extend({
 		return true;
 	},
 
+	_redraw: function() {
+		this._redrawNeeded = true;
+		if (this._onFrameCallback) {
+			this._onFrameCallback(0, true);
+		} else {
+			this.draw();
+		}
+	},
+
+	_transform: function(matrix, flags) {
+		this._matrix.preConcatenate(matrix);
+		this._bounds = null;
+		this._inverse = null;
+		this._redraw();
+	},
+
 	getCanvas: function() {
 		return this._canvas;
 	},
@@ -6599,16 +6649,12 @@ var View = this.View = PaperScopeItem.extend({
 				delta: delta
 			});
 		}
-		if (this._onFrameCallback) {
-			this._onFrameCallback(0, true);
-		} else {
-			this.draw(true);
-		}
+		this._redraw();
 	},
 
 	getBounds: function() {
 		if (!this._bounds)
-			this._bounds = this._matrix._transformBounds(
+			this._bounds = this._getInverse()._transformBounds(
 					new Rectangle(new Point(), this._viewSize));
 		return this._bounds;
 	},
@@ -6640,12 +6686,6 @@ var View = this.View = PaperScopeItem.extend({
 
 	scrollBy: function(point) {
 		this._transform(new Matrix().translate(Point.read(arguments).negate()));
-	},
-
-	_transform: function(matrix, flags) {
-		this._matrix.preConcatenate(matrix);
-		this._bounds = null;
-		this._inverse = null;
 	},
 
 	draw: function(checkRedraw) {
@@ -6727,7 +6767,7 @@ var View = this.View = PaperScopeItem.extend({
 		_views: {},
 		_id: 0
 	}
-}, new function() { 
+}, new function() {
 	var tool,
 		timer,
 		curPoint,
@@ -6842,7 +6882,6 @@ var View = this.View = PaperScopeItem.extend({
 			updateFocus: updateFocus
 		}
 	};
-}, new function() {
 });
 
 var Event = this.Event = Base.extend({
@@ -6905,7 +6944,9 @@ var Key = this.Key = new function() {
 		39: 'right',
 		40: 'down',
 		46: 'delete',
-		91: 'command'
+		91: 'command',
+		93: 'command', 
+		224: 'command'  
 	},
 
 	modifiers = Base.merge({
@@ -6942,12 +6983,10 @@ var Key = this.Key = new function() {
 			var code = event.which || event.keyCode;
 			var key = keys[code], name;
 			if (key) {
-				if (modifiers[name = Base.camelize(key)] !== undefined) {
+				if ((name = Base.camelize(key)) in modifiers)
 					modifiers[name] = true;
-				} else {
-					charCodeMap[code] = 0;
-					handleKey(true, code, null, event);
-				}
+				charCodeMap[code] = 0;
+				handleKey(true, code, null, event);
 			} else {
 				downCode = code;
 			}
@@ -6965,9 +7004,9 @@ var Key = this.Key = new function() {
 		keyup: function(event) {
 			var code = event.which || event.keyCode,
 				key = keys[code], name;
-			if (key && modifiers[name = Base.camelize(key)] !== undefined) {
+			if (key && (name = Base.camelize(key)) in modifiers)
 				modifiers[name] = false;
-			} else if (charCodeMap[code] != null) {
+			if (charCodeMap[code] != null) {
 				handleKey(false, code, charCodeMap[code], event);
 				delete charCodeMap[code];
 			}
