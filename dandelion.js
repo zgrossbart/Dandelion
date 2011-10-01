@@ -111,7 +111,7 @@ function Seed() {
     
     this.roateMove = function(/*int*/ angle) {
         var offset;
-        if (this.group.position.x < 850 && this.group.position.y < 775) {
+        if (this.group.position.x < 850 && this.group.position.y < 800) {
             offset = random(0, 200);
             this.group.rotate(angle, new Point(view.center.x + offset, view.center.y + offset));
         } else {
@@ -177,9 +177,12 @@ jQuery(document).ready(function() {
         seed.rotate(i * angle);
         seeds.push(seed);
     }
+    
+    setTimeout(start, 3000);
+    start();
 });
 
-function onMouseUp(event) {
+function start() {
     started = !started;
     
     if (started) {
@@ -191,6 +194,10 @@ function onMouseUp(event) {
             }
         }, 150);
     }
+}
+
+function onMouseUp(event) {
+    start();
 }
 
 function onFrame(event) {
