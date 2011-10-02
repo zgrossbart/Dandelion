@@ -206,7 +206,7 @@ function start() {
         if (seedCount === seeds.length - 1) {
             clearInterval(id);
         }
-    }, 500);
+    }, 1000);
     
     //clearInterval(id);
 }
