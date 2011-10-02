@@ -65,22 +65,20 @@ function Seed() {
             
             path.add(new Point(p1.x + 2, p1.y + 2));
             
+            var y = random(1, 5);
+            
             if (i % 2 == 0) {
                 // The point through which we will create the arc:
-                throughPoint = new Point(p1.x + random(1, 5), 
-                                         p1.y - random(1, 5));
+                throughPoint = new Point(p1.x + random(1, 5), p1.y - y);
             
                 // The point at which the arc will end:
-                toPoint = new Point(p1.x + random(5, 35), 
-                                    p1.y - 20 - random(1, 5));
+                toPoint = new Point(p1.x + random(5, 35), p1.y - 20 - y);
             } else {
                 // The point through which we will create the arc:
-                throughPoint = new Point(p1.x - random(1, 5), 
-                                         p1.y - random(1, 5));
+                throughPoint = new Point(p1.x - random(1, 5), p1.y - y);
                 
                 // The point at which the arc will end:
-                toPoint = new Point(p1.x - random(5, 35), 
-                                    p1.y - 20 - random(1, 5));
+                toPoint = new Point(p1.x - random(5, 35), p1.y - 20 - y);
             }
             
             // Draw an arc through 'throughPoint' to 'toPoint'
