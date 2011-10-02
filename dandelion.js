@@ -62,9 +62,6 @@ function Seed() {
             
             var p1 = new Point(p.x, p.y);
             
-            var circle = new Path.Circle(p1, 2);
-            circle.fillColor = '#fff3c9';
-            group.addChild(circle);
             
             path.add(new Point(p1.x + 2, p1.y + 2));
             
