@@ -138,6 +138,11 @@ var seedCount = 0;
 var started = false;
 
 jQuery(document).ready(function() {
+    
+    $('#reload').click(function(evt) {
+        window.location.reload();
+    });
+    
     var group = new Group();
     
     var path = new Path();

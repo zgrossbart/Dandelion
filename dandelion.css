@@ -7,12 +7,7 @@ body {
 }
 
 a {
-    padding-right: 13px;
-}
-
-a.actorLink, #deadwoodjohn, #forkme {
-    background: none;
-    padding-right: 0px;
+    color: #acdd33;
 }
 
 #mainText {
@@ -22,17 +17,6 @@ a.actorLink, #deadwoodjohn, #forkme {
     -webkit-column-width: 800px;
     column-gap: 40px; 
     column-width: 800px;    
-}
-
-h1 {
-    font-family: "ff-basic-gothic-web-pro", Verdana,Arial,Sans-serif;
-    margin-left: 275px;
-    font-weight: bold;
-}
-
-p {
-    margin-left: 125px;
-    width: 750px;
 }
 
 #canvas {
@@ -53,4 +37,17 @@ p {
     padding: 1em;
     width: 450px;
     text-align: center;
+}
+
+#container {
+    position: relative;
+    width: 800px;
+}
+
+#expl {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    width: 150px;
+    color: #fff3c9;
 }
