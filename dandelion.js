@@ -223,7 +223,7 @@ function onFrame(event) {
         for (var i = 0; i < seeds.length; i++) {
             if (i < seedCount && !seeds[i].isOffscreen()) {
                 stillRunning = true;
-                seeds[i].roateMove(4);
+                seeds[i].roateMove(random(2, 6));
             }
         }
         
