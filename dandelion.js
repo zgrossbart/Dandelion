@@ -69,13 +69,13 @@ function Seed() {
             
             if (i % 2 == 0) {
                 // The point through which we will create the arc:
-                throughPoint = new Point(p1.x + random(1, 5), p1.y - y);
+                throughPoint = new Point(p1.x + random(1, 3), p1.y - y);
             
                 // The point at which the arc will end:
                 toPoint = new Point(p1.x + random(5, 35), p1.y - 20 - y);
             } else {
                 // The point through which we will create the arc:
-                throughPoint = new Point(p1.x - random(1, 5), p1.y - y);
+                throughPoint = new Point(p1.x - random(1, 3), p1.y - y);
                 
                 // The point at which the arc will end:
                 toPoint = new Point(p1.x - random(5, 35), p1.y - 20 - y);
@@ -206,7 +206,7 @@ function start() {
         if (seedCount === seeds.length - 1) {
             clearInterval(id);
         }
-    }, 250);
+    }, 500);
     
     //clearInterval(id);
 }
