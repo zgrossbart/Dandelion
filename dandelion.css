@@ -10,15 +10,6 @@ a {
     color: #acdd33;
 }
 
-#mainText {
-    -moz-column-gap: 40px;
-    -moz-column-width: 800px;
-    -webkit-column-gap: 40px; 
-    -webkit-column-width: 800px;
-    column-gap: 40px; 
-    column-width: 800px;    
-}
-
 #canvas {
     background: url("blue_sky_grass.jpg") no-repeat scroll center center transparent;
     border: thin solid #E9E9E9;
@@ -50,4 +41,10 @@ a {
     right: 25px;
     width: 150px;
     color: #fff3c9;
+}
+
+#attribution {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
 }
