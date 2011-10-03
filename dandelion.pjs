@@ -142,7 +142,7 @@ function Seed() {
         this.group = group;
         this.position = new Point(this.group.position.x, this.group.position.y + 15);
         
-        this.dest = new  Point(1800, random(-100, 900));
+        this.dest = new  Point(1800, random(-300, 1100));
         
     }
     
@@ -221,8 +221,8 @@ jQuery(document).ready(function() {
     var firstPoint = new Point(0, 550);
     path.add(firstPoint);
     
-    var throughPoint = new Point(75, 275);
-    var toPoint = new Point(100, 100);
+    var throughPoint = new Point(75, 400);
+    var toPoint = new Point(100, 250);
     path.arcTo(throughPoint, toPoint);
     
     /*
