@@ -142,6 +142,8 @@ function Seed() {
         this.group = group;
         this.position = new Point(this.group.position.x, this.group.position.y + 15);
         
+        this.dest = new  Point(1200, random(-100, 900));
+        
     }
     
     this.move = function(/*Point*/ point) {
@@ -166,13 +168,11 @@ function Seed() {
      */
     this.rotateMove = function(/*int*/ angle) {
         if (this.group.position.x < 850 && this.group.position.y < 650) {
-            var offset = random(25, 175);
-            var neg = random(0, 2) % 2 == 0;
-            if (neg) {
-                this.group.rotate(angle, new Point(this.group.position.x - offset, this.group.position.y + offset));
-            } else {
-                this.group.rotate(angle, new Point(this.group.position.x + offset, this.group.position.y + offset));
-            }
+            var vector = this.dest - this.group.position;
+            this.group.position += vector / 60;
+            
+            this.angle += angle;
+            this.group.rotate(angle);
         } else {
             /*
              * Then it is off the screen
