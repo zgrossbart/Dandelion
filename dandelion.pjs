@@ -142,7 +142,7 @@ function Seed() {
         this.group = group;
         this.position = new Point(this.group.position.x, this.group.position.y + 15);
         
-        this.dest = new  Point(1200, random(-100, 900));
+        this.dest = new  Point(1800, random(-100, 900));
         
     }
     
@@ -169,7 +169,7 @@ function Seed() {
     this.rotateMove = function(/*int*/ angle) {
         if (this.group.position.x < 850 && this.group.position.y < 650) {
             var vector = this.dest - this.group.position;
-            this.group.position += vector / 60;
+            this.group.position += vector / 100;
             
             this.angle += angle;
             this.group.rotate(angle);
