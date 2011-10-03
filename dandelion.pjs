@@ -169,7 +169,7 @@ function Seed() {
     this.rotateMove = function(/*int*/ angle) {
         if (this.group.position.x < 850 && this.group.position.y < 650) {
             var vector = this.dest - this.group.position;
-            this.group.position += vector / 100;
+            this.group.position += vector / 150;
             
             this.angle += angle;
             this.group.rotate(angle);
