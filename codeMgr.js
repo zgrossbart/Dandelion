@@ -118,12 +118,7 @@ jQuery(document).ready(function() {
     
     $('#editContainer').css('height', ($(window).height() - 75) + 'px');
     
-    $('#reload').click(function(evt) {
-        window.location.reload();
-    });
-    
-    
-    $('#run').click(function(evt) {
+    $('#run, #reload').click(function(evt) {
         codeMgr.runScript();
     });
     
