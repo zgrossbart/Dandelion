@@ -16,6 +16,12 @@
  *
  ******************************************************************************/
 
+/*
+ * These are all the colors for our dandelion
+ */
+var seedBulbColor = '#d0aa7b';
+var stemColor = '#567e37';
+var wispColor = '#fff3c9';
 
 /**
  * This script uses a lot of random numbers to make everything
@@ -69,7 +75,7 @@ function Seed() {
         var size = new Size(4, 10);
         var rectangle = new Rectangle(p, size);
         var bottom = new Path.Oval(rectangle);
-        bottom.fillColor = '#d0aa7b';
+        bottom.fillColor = seedBulbColor;
         group.addChild(bottom);
         
         if (shortStem) {
@@ -82,7 +88,7 @@ function Seed() {
          * or the other randomly.
          */
         var stem = new Path();
-        stem.strokeColor = '#567e37';
+        stem.strokeColor = stemColor;
         stem.strokeWidth = 1;
         stem.add(new Point(p.x + 2, p.y));
     
@@ -101,7 +107,7 @@ function Seed() {
         p = toPoint;
         for (var i = 0; i < random(4, 10); i++) {
             path = new Path();
-            path.strokeColor = '#fff3c9';
+            path.strokeColor = wispColor;
             path.strokeWidth = 1;
             
             var p1 = new Point(p.x, p.y);
@@ -131,7 +137,7 @@ function Seed() {
              * Now we put the circle at the tip of the flutter.
              */
             circle = new Path.Circle(toPoint, 2);
-            circle.fillColor = '#fff3c9';
+            circle.fillColor = wispColor;
             group.addChild(circle);
         }
         
@@ -219,7 +225,7 @@ function init() {
      * green arcing line.
      */
     var path = new Path();
-    path.strokeColor = '#567e37';
+    path.strokeColor = stemColor;
     path.strokeWidth = 5;
     
     var firstPoint = new Point(0, 550);
@@ -233,7 +239,7 @@ function init() {
      * The bulb of the flower is a green circle.
      */
     var bulb = new Path.Circle(toPoint, 10);
-    bulb.fillColor = '#567e37';
+    bulb.fillColor = stemColor;
     
     var angle = 360 / bulb.length;
     
