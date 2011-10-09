@@ -309,8 +309,8 @@ function onFrame(event) {
         /*
          * We only animate the seeds below the current seed count
          */
-        for (var i = 0; i < seeds.length; i++) {
-            if (i < seedCount && !seeds[i].isOffscreen()) {
+        for (var i = 0; i < seedCount; i++) {
+            if (!seeds[i].isOffscreen()) {
                 stillRunning = true;
                 seeds[i].rotateMove(random(2, 4));
             }
