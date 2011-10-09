@@ -86,6 +86,17 @@ a, a:link, a:visited {
     top: -35px;
 }
 
+#poweredBy {
+    font-size: 14px;
+    position: absolute;
+    right: 15px;
+    top: -25px;
+}
+
+#poweredBy a, #poweredBy a:link, #poweredBy a:visited {
+    color: blue;
+}
+
 .weak {
     font-weight: normal;
     font-size: 0.85em;

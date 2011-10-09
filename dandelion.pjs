@@ -266,7 +266,7 @@ function init() {
     /*
      * We start the seeds blowing after three seconds.
      */
-    setTimeout(start, 3000);
+    setTimeout(start, 1000);
 }
 
 /**
