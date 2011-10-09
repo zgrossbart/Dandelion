@@ -196,18 +196,22 @@ var seedCount = 0;
 var started = false;
 
 /**
- * This code is PaperScript, but it gets translated into 
- * JavaScript so we can call JQuery and use their document ready 
- * function. 
+ * This function initializes our script.
  */
-jQuery(document).ready(function() {
+function init() {
     
     /*
-     * This little bit of JavaScript handles reloading when
-     * someone clicks the reload button.
+       We're saving our paperscope object so we can use it
+       later for the in place code editing.
      */
-    $('#reload').click(function(evt) {
-        window.location.reload();
+    PaperScope.each(function(/*PaperScope*/ scope) {
+        if (scope.project) {
+            codeMgr.scope = scope;
+        }
+    });
+    
+    $('#edit').click(function(evt) {
+        started = false;
     });
     
     /*
@@ -263,7 +267,7 @@ jQuery(document).ready(function() {
      * We start the seeds blowing after three seconds.
      */
     setTimeout(start, 3000);
-});
+}
 
 /**
  * This function starts the animation.  We use another timer so 
@@ -311,3 +315,5 @@ function onFrame(event) {
         }
     }
 }
+
+init();

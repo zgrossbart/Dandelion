@@ -4,11 +4,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
         <title>Dandelion</title> 
         
-        <link rel="stylesheet" href="dandelion.css" type="text/css" media="screen">
         <script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="paper.js" type="text/javascript" charset="utf-8"></script>
+        <script src="codeMgr.js" type="text/javascript" charset="utf-8"></script>
         
-        <script type="text/paperscript" canvas="canvas" src="dandelion.pjs"></script>
+        <script type="text/paperscript" canvas="canvas" src="dandelion.pjs" id="script"></script>
+        
+        <link rel="stylesheet" href="codemirror/codemirror.css">
+        <script src="codemirror/codemirror.js"></script>
+        <script src="codemirror/javascript.js"></script>
+        <link rel="stylesheet" href="codemirror/default.css">
+        <link rel="stylesheet" href="codemirror/docs.css">
+        
+        <link rel="stylesheet" href="dandelion.css" type="text/css" media="screen">
+        
     </head> 
     <body>
         <a href="http://github.com/zgrossbart/Dandelion" id="forkme"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
@@ -17,7 +26,7 @@
                 <h2>Dandelion</h2>
                 
                 <p>
-                    This dandelion is a <a href="http://en.wikipedia.org/wiki/Vector_drawing">vectorized</a> animation created with <a href="http://paperjs.org/">Paper JS</a>.  
+                    This dandelion is a <a href="http://en.wikipedia.org/wiki/Vector_drawing">vectorized</a> animation created with <a href="http://paperjs.org/">Paper.js</a>.  
                 </p>
                 
                 <p>
@@ -25,11 +34,18 @@
                 </p>
                 
                 <p>
+                    <button id="edit">Edit</button>
                     <button id="reload">Reload</button>
                 </p>
             </div>
             
             <canvas id="canvas" width=800 height=600></canvas>
+        </div>
+        
+        <div id="editContainer">
+            <h2>Dandelion <span class="weak">Make changes to the dandelion code and press the run button</span></h2>
+            <textarea id="code" name="code"></textarea>
+            <button id="run">Run</button>
         </div>
     </body>
 </html>

@@ -6,7 +6,7 @@ body {
     font-family: "ff-basic-gothic-web-pro", Verdana,Arial,Sans-serif;
 }
 
-a {
+a, a:link, a:visited {
     color: #acdd33;
 }
 
@@ -47,4 +47,49 @@ a {
     position: absolute;
     bottom: 25px;
     right: 25px;
+}
+
+#editContainer {
+    position: relative;
+    display: none;
+}
+
+#run {
+    position: absolute;
+    top: 15px;
+    right: 50px;
+    z-index: 50;
+}
+
+#editContainer {
+    height: 100%;
+    width: 90%;
+    border: thin solid lightgray;
+}
+
+.fullscreen {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 95%;
+    margin: 0;
+    padding: 0;
+    border: 0px solid #BBBBBB;
+    background-color: #F9F9F9;
+}
+
+#editContainer h2 {
+    left: 0;
+    position: absolute;
+    top: -35px;
+}
+
+.weak {
+    font-weight: normal;
+    font-size: 0.85em;
+    color: gray;
+    font-size: 14px;
+    margin-left: 0.5em;
 }
