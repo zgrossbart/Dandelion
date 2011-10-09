@@ -21,6 +21,10 @@
  * the page.  It isn't required to make the animation run.
  */
 codeMgr = {
+    
+    /**
+     * Run the script contents of the editor
+     */
     runScript: function() {
         try {
             // Update script to edited version
@@ -38,6 +42,9 @@ codeMgr = {
         }
     },
     
+    /**
+     * Hide the error message if it is visible
+     */
     hideError: function(/*string*/ err) {
         if ($('#err').is(":visible")) {
             $('#err').hide();
@@ -49,6 +56,9 @@ codeMgr = {
         }
     },
     
+    /**
+     * Show the specified error message above the script editor
+     */
     showError: function(/*string*/ err) {
         console.log('err: ' + err);
         $('#err').show().text('Error running script: ' + err);
@@ -59,6 +69,9 @@ codeMgr = {
         codeMgr.editor.refresh();
     },
     
+    /**
+     * Show the script editor
+     */
     editScript: function() {
         $('#container').hide();
         $('#editContainer').show();
