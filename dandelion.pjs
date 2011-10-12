@@ -64,7 +64,7 @@ function Seed() {
         
         /*
          * Our group gives us a single container to draw, rotate, and
-         * move all tha parts of our seed at the same time.
+         * move all the parts of our seed at the same time.
          */
         var group = new Group();
         
@@ -249,7 +249,7 @@ function init() {
      * always point out from the flower.
      */
     for (var i = 0; i < bulb.length; i++) {
-        var seed = new Seed()
+        var seed = new Seed();
         seed.create(bulb.getPointAt(i));
         seed.rotate(i * angle);
         seeds.push(seed);
@@ -261,7 +261,7 @@ function init() {
      * look extra fluffy.
      */
     for (var i = 0; i < 18; i++) {
-        var seed = new Seed()
+        var seed = new Seed();
         var point = new Point(toPoint.x + random(-3, 3),
                               toPoint.y + random(-3, 3));
         seed.create(new Point(toPoint), true);
