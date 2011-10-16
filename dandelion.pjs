@@ -60,7 +60,7 @@ function Seed() {
             height = random(10, 50);
         }
         
-        p.y += height;
+        //p.y += height;
         
         /*
          * Our group gives us a single container to draw, rotate, and
@@ -76,6 +76,7 @@ function Seed() {
         var rectangle = new Rectangle(p, size);
         var bottom = new Path.Oval(rectangle);
         bottom.fillColor = seedBulbColor;
+        bottom.opacity = 0.5;
         group.addChild(bottom);
         
         if (shortStem) {
@@ -150,10 +151,6 @@ function Seed() {
         
         this.dest = new  Point(1800, random(-300, 1100));
         
-    }
-    
-    this.move = function(/*Point*/ point) {
-        this.group.translate(point);
     }
     
     /**
@@ -264,7 +261,7 @@ function init() {
         var seed = new Seed();
         var point = new Point(toPoint.x + random(-3, 3),
                               toPoint.y + random(-3, 3));
-        seed.create(new Point(toPoint), true);
+        seed.create(new Point(point), true);
         seed.rotate(random(0, 360));
         seeds.push(seed);
     }
